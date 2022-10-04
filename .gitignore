@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Starnet++ and libraries should be retrieved from it's own source.
+*.dylib
+*.sh
+starnet++
+*.pb 
+mono_test.tif
+rgb_test.tif
+README.txt
