@@ -85,35 +85,13 @@ def Process():
         app.Close()
         del app
         sys.exit(2)
-
-    # #Get the FILTER value of the FITS header (HDUL = Header Data Unit List)
-    # # attempt to read the filter value - if if fails then we will create the FILTER header
-    # # my understanding from the original docs is that this FILTER is used by Siril PixelMath
-    # hdul = fits.open(srcInput, mode='update')
-    # try:
-    #     fltr0=hdul[0].header['FILTER']        
-    # except Exception as e :
-    #     print("\n*******" +  str(e) + "in "+ str(srcInput))
-    #     print("*******  Creating the missing field... " + "\n" )
-    #     hdr= hdul[0].header
-    #     # Write back to the file
-    #     hdr.insert('DATE', ('FILTER', '   '))
-    #     hdul.flush()
-    #     # Read it back
-    #     fltr0=hdul[0].header['FILTER']
-    
-    # print("FILTER = " +  str(fltr0) + "\n" )
-    # hdul.close(output_verify='fix')
-        
-    #Set pysiril extension to the same as the input file (can be fit or fits)
-    #app.Execute('setext {:s}'.format(srcExt))
+    # Set the Fit extension
     cmd.setext('fit')
 
     # set the working directory to the current directory
     workdir = os.getcwd()
     cmd.cd(workdir)
-    #app.Execute('cd {:s}'.format(workdir))
-
+    
     # Open the original input 32b FITS file
     # convert it into 16b and save as TIF file with the same name
     cmd.load(srcFilename)          
@@ -195,48 +173,6 @@ def Process():
     
     os.remove(srcFilenameAsTif)              # Remove original Input tif we created 
 
-    # ########################################
-    # # Set the FILTER value in the FITS header
-    # # For Starless
-    # sl_name = starless_filename+'.fit'
-    # hdul = fits.open(sl_name, mode='update')
-
-    # try:
-    #     fltr=hdul[0].header['FILTER']        
-    # except Exception as e :
-    #     print("******* " +  str(e) + "in "+ str(sl_name))
-    #     print("******* " +  " Creating the missing field... ")
-    #     hdr= hdul[0].header
-    #     hdr.insert('DATE', ('FILTER', ' '))
-    #     hdul.flush()
-    #     fltr=fltr0
-
-    # hdr = hdul[0].header
-    # newfltr= str(fltr)+'_sls' 
-    # hdr['FILTER'] = newfltr
-    # hdul.close(output_verify='fix')
-
-    # ########################################    
-    # # ...and now for the Stars file    
-    # stars=stars+'.fit'
-    # hdul = fits.open(stars, mode='update')
-
-    # try:
-    #     fltr=hdul[0].header['FILTER']        
-    # except Exception as e :
-    #     print("******* " +  str(e) + "in "+ str(stars))
-    #     print("******* " +  " Creating the missing field... ")
-    #     hdr= hdul[0].header
-    #     hdr.insert('DATE', ('FILTER', ' '))
-    #     hdul.flush()
-    #     fltr=fltr0
-
-    # hdr = hdul[0].header
-    # newfltr= str(fltr)+'_str' 
-    # hdr['FILTER'] = newfltr
-    # hdul.close(output_verify='fix')
-    # ########################################  
-   
     print('*****************************************')
     print('Processing Completed at ' + datetime.now().strftime('%Y-%m-%d_%H-%M-%S'))
     print('*****************************************')
