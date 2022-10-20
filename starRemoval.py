@@ -165,12 +165,13 @@ def Process():
     # Deletion of TIF temp files  
     # tokill=starless_filename + '.tif'         
     # os.remove(tokill)                       #Remove bla_s.tif  
-    # For a currently unknown reason this does not appear to be working in script but does work if manually performed.
-    # srcFilename, inputfile_extension=os.path.splitext(stars)
-    # cmd.load(stars)          
-    # cmd.set16bits
-    # cmd.savetif(srcFilename)
-    print('!REMINDER!/n - the automated creation of the TIF version of the FIT Stars file does not work, /n if you want this please create manually using Siril Export of fit stars.')
+    # FIXED - 2022-10-20 : For a currently unknown reason this does not appear to be working in script but does work 
+    #   if manually performed.
+    srcFilename, inputfile_extension=os.path.splitext(stars)
+    cmd.load(stars)          
+    cmd.set16bits
+    cmd.savetif(srcFilename)
+    # print('!REMINDER!/n - the automated creation of the TIF version of the FIT Stars file does not work, /n if you want this please create manually using Siril Export of fit stars.')
     
     os.remove(srcFilenameAsTif)              # Remove original Input tif we created 
 
