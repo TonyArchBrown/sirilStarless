@@ -1,3 +1,5 @@
+# This project probably serves no purpose any longer as since Siril 1.2 Starnet integration has become built in.
+
 # sirilStarless
 Uses starnet++ with Siril to automate the generation of Starless and Stars only images given a fit file input
 
